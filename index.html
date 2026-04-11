@@ -1,84 +1,156 @@
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-#njl-quiz*{box-sizing:border-box;margin:0;padding:0}
-#njl-quiz{font-family:'Montserrat',sans-serif;background:#fdfaf6;padding:0 0 40px;--bg:#fdfaf6;--s1:#f7f1e8;--s2:#ede4d4;--s3:#ddd0b8;--s4:#c8b090;--s5:#a08060;--s6:#6b4f30;--ink:#2e1f0e;--gold:#c09060;--gold2:#e8d5b0}
-#njl-quiz .scr{display:none}
-#njl-quiz .scr.on{display:block;animation:njlrise .4s ease both}
-@keyframes njlrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-#njl-quiz .start{text-align:center;padding:36px 16px 20px}
-#njl-quiz .stag{display:inline-block;font-size:9px;letter-spacing:.38em;color:#a08060;text-transform:uppercase;font-weight:500;border-bottom:1px solid #e8d5b0;padding-bottom:6px;margin-bottom:28px}
-#njl-quiz .sh1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.1;margin-bottom:6px}
-#njl-quiz .sh1 strong{font-weight:600;font-style:normal;color:#c09060;display:block}
-#njl-quiz .orn{font-family:'Cormorant Garamond',serif;color:#e8d5b0;font-size:20px;letter-spacing:8px;margin:14px 0;display:block}
-#njl-quiz .ssub{font-size:13px;color:#a08060;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto 8px}
-#njl-quiz .spromo{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:#c09060;font-weight:500;margin-bottom:32px}
-#njl-quiz .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.34em;font-weight:600;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;transition:opacity .2s,transform .2s;text-decoration:none}
-#njl-quiz .btn:hover{opacity:.82;transform:translateY(-1px)}
-#njl-quiz .btnp{background:linear-gradient(135deg,#c09060 0%,#6b4f30 100%);color:#fff;padding:17px 46px}
-#njl-quiz .btnb{display:block;width:100%;text-align:center;padding:17px}
-#njl-quiz .btng{background:transparent;color:#6b4f30;padding:13px 30px;border:1.5px solid #ddd0b8}
-#njl-quiz .btng:hover{border-color:#c09060;color:#c09060}
-#njl-quiz .prog{padding-top:28px;margin-bottom:20px}
-#njl-quiz .prow{display:flex;justify-content:space-between;margin-bottom:8px}
-#njl-quiz .plbl{font-size:9px;letter-spacing:.22em;color:#c8b090;text-transform:uppercase;font-weight:500}
-#njl-quiz .ppct{font-size:9px;color:#c09060;font-weight:600}
-#njl-quiz .ptrack{width:100%;height:1.5px;background:#ede4d4;overflow:hidden}
-#njl-quiz .pfill{height:100%;background:linear-gradient(90deg,#e8d5b0,#c09060);transition:width .5s ease}
-#njl-quiz .qcard{background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
-#njl-quiz .qeye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
-#njl-quiz .qtit{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4.5vw,30px);color:#2e1f0e;font-weight:400;line-height:1.3;margin-bottom:28px}
-#njl-quiz .opts{display:flex;flex-direction:column;gap:9px}
-#njl-quiz .opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;cursor:pointer;transition:all .2s;background:#fdfaf6}
-#njl-quiz .opt:hover{border-color:#e8d5b0;background:#f7f1e8}
-#njl-quiz .opt.sel{border-color:#c09060;background:linear-gradient(135deg,#fdf8ef,#f8edda)}
-#njl-quiz .optl{width:32px;height:32px;border-radius:50%;border:1px solid #ddd0b8;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;font-style:italic;color:#a08060;flex-shrink:0;transition:all .2s}
-#njl-quiz .opt.sel .optl{background:#c09060;border-color:#c09060;color:#fff;font-style:normal}
-#njl-quiz .optt{font-size:13px;color:#2e1f0e;font-weight:300;line-height:1.4;flex:1}
-#njl-quiz .opt.sel .optt{font-weight:400;color:#6b4f30}
-#njl-quiz .qnav{display:flex;justify-content:flex-end;margin-top:26px}
-#njl-quiz .bnxt{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.32em;font-weight:600;text-transform:uppercase;padding:13px 28px;border:none;border-radius:1px;cursor:pointer;background:linear-gradient(135deg,#c09060,#6b4f30);color:#fff;transition:opacity .2s;opacity:.25;pointer-events:none}
-#njl-quiz .bnxt.on{opacity:1;pointer-events:all}
-#njl-quiz .cblock{margin-top:28px;background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
-#njl-quiz .ceye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
-#njl-quiz .ctit{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,36px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:10px}
-#njl-quiz .csub{font-size:13px;color:#a08060;line-height:1.75;font-weight:300;margin-bottom:28px}
-#njl-quiz .csub em{color:#c09060;font-style:normal;font-weight:500}
-#njl-quiz .fields{display:flex;flex-direction:column;gap:11px;margin-bottom:14px}
-#njl-quiz .finp{width:100%;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;color:#2e1f0e;background:#fdfaf6;outline:none;transition:border-color .2s}
-#njl-quiz .finp::placeholder{color:#ddd0b8}
-#njl-quiz .finp:focus{border-color:#c09060;background:#fff}
-#njl-quiz .chk{display:flex;align-items:flex-start;gap:10px;margin-bottom:24px;cursor:pointer}
-#njl-quiz .chk input{margin-top:3px;accent-color:#c09060}
-#njl-quiz .chk span{font-size:11px;color:#c8b090;line-height:1.6;font-weight:300}
-#njl-quiz .rhero{margin-top:28px;background:linear-gradient(160deg,#f7f1e8,#ede4d4 55%,#ddd0b8);border:1px solid #ddd0b8;border-radius:2px 2px 0 0;padding:40px 28px 36px;text-align:center}
-#njl-quiz .reye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
-#njl-quiz .rinto{font-size:11px;color:#a08060;letter-spacing:.1em;text-transform:uppercase;font-weight:300;margin-bottom:4px}
-#njl-quiz .rtech{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,9vw,60px);color:#2e1f0e;font-weight:500;font-style:italic;line-height:1.05;margin-bottom:20px}
-#njl-quiz .rrule{width:40px;height:1px;background:#e8d5b0;margin:0 auto 18px}
-#njl-quiz .rdesc{font-size:13px;color:#6b4f30;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto}
-#njl-quiz .rbody{background:#fff;border:1px solid #ede4d4;border-top:none;border-radius:0 0 2px 2px;padding:32px 28px 36px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
-#njl-quiz .slbl{font-size:9px;letter-spacing:.36em;color:#c8b090;text-transform:uppercase;font-weight:600;margin-bottom:11px;display:block}
-#njl-quiz .vpill{display:inline-flex;align-items:center;gap:9px;background:#f7f1e8;border:1px solid #e8d5b0;border-radius:50px;padding:10px 22px;margin-bottom:26px}
-#njl-quiz .vdot{width:7px;height:7px;border-radius:50%;background:#c09060;flex-shrink:0}
-#njl-quiz .vtxt{font-family:'Cormorant Garamond',serif;font-size:17px;color:#6b4f30;font-weight:500;font-style:italic}
-#njl-quiz .irow{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
-#njl-quiz .ichip{padding:8px 20px;border:1px solid #ede4d4;border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:15px;color:#6b4f30;font-style:italic;background:#fdfaf6}
-#njl-quiz .bwrap{background:#f7f1e8;border:1px solid #ede4d4;border-radius:2px;padding:22px 24px;margin-bottom:26px}
-#njl-quiz .bhead{font-size:9px;letter-spacing:.36em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
-#njl-quiz .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#njl-quiz .bitem{display:flex;align-items:center;gap:9px}
-#njl-quiz .bdot{width:4px;height:4px;border-radius:50%;background:#c09060;flex-shrink:0}
-#njl-quiz .btxt{font-size:12px;color:#6b4f30;font-weight:400;line-height:1.4}
-#njl-quiz .pbox{background:linear-gradient(155deg,#f7f1e8,#ede4d4);border:1px solid #ddd0b8;border-radius:2px;padding:30px 24px;text-align:center;margin-bottom:12px}
-#njl-quiz .peye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:10px}
-#njl-quiz .pnum{font-family:'Cormorant Garamond',serif;font-size:68px;color:#2e1f0e;font-weight:500;line-height:1;margin-bottom:8px}
-#njl-quiz .pnum sup{font-size:30px;vertical-align:super}
-#njl-quiz .pnote{font-size:12px;color:#a08060;font-weight:300;line-height:1.7;margin-bottom:22px}
-#njl-quiz .pnote em{color:#c09060;font-style:normal;font-weight:500}
-#njl-quiz .cnsbox{border:1px dashed #ddd0b8;border-radius:2px;padding:22px;text-align:center;margin-top:12px}
-#njl-quiz .cnstxt{font-size:12px;color:#c8b090;font-weight:300;line-height:1.65;margin-bottom:14px}
-@media(max-width:480px){#njl-quiz .bgrid{grid-template-columns:1fr}#njl-quiz .qcard,#njl-quiz .cblock,#njl-quiz .rbody{padding:26px 18px}#njl-quiz .rhero{padding:30px 18px}}
-</style>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>notJUSTLIPS Quiz</title>
+
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq) return;
+      n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);
+      };
+      if(!f._fbq) f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);
+      t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s);
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init','382002759543740');
+    fbq('track','PageView');
+
+    window.trackMeta = function(eventName, params) {
+      try {
+        if (typeof fbq === 'function') {
+          fbq('track', eventName, params || {});
+          console.log('[Meta] Sent event:', eventName, params || {});
+        } else {
+          console.log('[Meta] fbq is not available');
+        }
+      } catch (e) {
+        console.error('[Meta] Event error:', eventName, e);
+      }
+    };
+
+    window.trackMetaCustom = function(eventName, params) {
+      try {
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', eventName, params || {});
+          console.log('[Meta] Sent custom event:', eventName, params || {});
+        } else {
+          console.log('[Meta] fbq is not available');
+        }
+      } catch (e) {
+        console.error('[Meta] Custom event error:', eventName, e);
+      }
+    };
+  </script>
+
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=382002759543740&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    #njl-quiz *{box-sizing:border-box;margin:0;padding:0}
+    #njl-quiz{font-family:'Montserrat',sans-serif;background:#fdfaf6;padding:0 0 40px;--bg:#fdfaf6;--s1:#f7f1e8;--s2:#ede4d4;--s3:#ddd0b8;--s4:#c8b090;--s5:#a08060;--s6:#6b4f30;--ink:#2e1f0e;--gold:#c09060;--gold2:#e8d5b0}
+    #njl-quiz .scr{display:none}
+    #njl-quiz .scr.on{display:block;animation:njlrise .4s ease both}
+    @keyframes njlrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    #njl-quiz .start{text-align:center;padding:36px 16px 20px}
+    #njl-quiz .stag{display:inline-block;font-size:9px;letter-spacing:.38em;color:#a08060;text-transform:uppercase;font-weight:500;border-bottom:1px solid #e8d5b0;padding-bottom:6px;margin-bottom:28px}
+    #njl-quiz .sh1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.1;margin-bottom:6px}
+    #njl-quiz .sh1 strong{font-weight:600;font-style:normal;color:#c09060;display:block}
+    #njl-quiz .orn{font-family:'Cormorant Garamond',serif;color:#e8d5b0;font-size:20px;letter-spacing:8px;margin:14px 0;display:block}
+    #njl-quiz .ssub{font-size:13px;color:#a08060;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto 8px}
+    #njl-quiz .spromo{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:#c09060;font-weight:500;margin-bottom:32px}
+    #njl-quiz .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.34em;font-weight:600;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;transition:opacity .2s,transform .2s;text-decoration:none}
+    #njl-quiz .btn:hover{opacity:.82;transform:translateY(-1px)}
+    #njl-quiz .btnp{background:linear-gradient(135deg,#c09060 0%,#6b4f30 100%);color:#fff;padding:17px 46px}
+    #njl-quiz .btnb{display:block;width:100%;text-align:center;padding:17px}
+    #njl-quiz .btng{background:transparent;color:#6b4f30;padding:13px 30px;border:1.5px solid #ddd0b8}
+    #njl-quiz .btng:hover{border-color:#c09060;color:#c09060}
+    #njl-quiz .prog{padding-top:28px;margin-bottom:20px}
+    #njl-quiz .prow{display:flex;justify-content:space-between;margin-bottom:8px}
+    #njl-quiz .plbl{font-size:9px;letter-spacing:.22em;color:#c8b090;text-transform:uppercase;font-weight:500}
+    #njl-quiz .ppct{font-size:9px;color:#c09060;font-weight:600}
+    #njl-quiz .ptrack{width:100%;height:1.5px;background:#ede4d4;overflow:hidden}
+    #njl-quiz .pfill{height:100%;background:linear-gradient(90deg,#e8d5b0,#c09060);transition:width .5s ease}
+    #njl-quiz .qcard{background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+    #njl-quiz .qeye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+    #njl-quiz .qtit{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4.5vw,30px);color:#2e1f0e;font-weight:400;line-height:1.3;margin-bottom:28px}
+    #njl-quiz .opts{display:flex;flex-direction:column;gap:9px}
+    #njl-quiz .opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;cursor:pointer;transition:all .2s;background:#fdfaf6}
+    #njl-quiz .opt:hover{border-color:#e8d5b0;background:#f7f1e8}
+    #njl-quiz .opt.sel{border-color:#c09060;background:linear-gradient(135deg,#fdf8ef,#f8edda)}
+    #njl-quiz .optl{width:32px;height:32px;border-radius:50%;border:1px solid #ddd0b8;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;font-style:italic;color:#a08060;flex-shrink:0;transition:all .2s}
+    #njl-quiz .opt.sel .optl{background:#c09060;border-color:#c09060;color:#fff;font-style:normal}
+    #njl-quiz .optt{font-size:13px;color:#2e1f0e;font-weight:300;line-height:1.4;flex:1}
+    #njl-quiz .opt.sel .optt{font-weight:400;color:#6b4f30}
+    #njl-quiz .qnav{display:flex;justify-content:flex-end;margin-top:26px}
+    #njl-quiz .bnxt{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.32em;font-weight:600;text-transform:uppercase;padding:13px 28px;border:none;border-radius:1px;cursor:pointer;background:linear-gradient(135deg,#c09060,#6b4f30);color:#fff;transition:opacity .2s;opacity:.25;pointer-events:none}
+    #njl-quiz .bnxt.on{opacity:1;pointer-events:all}
+    #njl-quiz .cblock{margin-top:28px;background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+    #njl-quiz .ceye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+    #njl-quiz .ctit{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,36px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:10px}
+    #njl-quiz .csub{font-size:13px;color:#a08060;line-height:1.75;font-weight:300;margin-bottom:28px}
+    #njl-quiz .csub em{color:#c09060;font-style:normal;font-weight:500}
+    #njl-quiz .fields{display:flex;flex-direction:column;gap:11px;margin-bottom:14px}
+    #njl-quiz .finp{width:100%;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;color:#2e1f0e;background:#fdfaf6;outline:none;transition:border-color .2s}
+    #njl-quiz .finp::placeholder{color:#ddd0b8}
+    #njl-quiz .finp:focus{border-color:#c09060;background:#fff}
+    #njl-quiz .chk{display:flex;align-items:flex-start;gap:10px;margin-bottom:24px;cursor:pointer}
+    #njl-quiz .chk input{margin-top:3px;accent-color:#c09060}
+    #njl-quiz .chk span{font-size:11px;color:#c8b090;line-height:1.6;font-weight:300}
+    #njl-quiz .rhero{margin-top:28px;background:linear-gradient(160deg,#f7f1e8,#ede4d4 55%,#ddd0b8);border:1px solid #ddd0b8;border-radius:2px 2px 0 0;padding:40px 28px 36px;text-align:center}
+    #njl-quiz .reye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+    #njl-quiz .rinto{font-size:11px;color:#a08060;letter-spacing:.1em;text-transform:uppercase;font-weight:300;margin-bottom:4px}
+    #njl-quiz .rtech{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,9vw,60px);color:#2e1f0e;font-weight:500;font-style:italic;line-height:1.05;margin-bottom:20px}
+    #njl-quiz .rrule{width:40px;height:1px;background:#e8d5b0;margin:0 auto 18px}
+    #njl-quiz .rdesc{font-size:13px;color:#6b4f30;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto}
+    #njl-quiz .rbody{background:#fff;border:1px solid #ede4d4;border-top:none;border-radius:0 0 2px 2px;padding:32px 28px 36px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+    #njl-quiz .slbl{font-size:9px;letter-spacing:.36em;color:#c8b090;text-transform:uppercase;font-weight:600;margin-bottom:11px;display:block}
+    #njl-quiz .vpill{display:inline-flex;align-items:center;gap:9px;background:#f7f1e8;border:1px solid #e8d5b0;border-radius:50px;padding:10px 22px;margin-bottom:26px}
+    #njl-quiz .vdot{width:7px;height:7px;border-radius:50%;background:#c09060;flex-shrink:0}
+    #njl-quiz .vtxt{font-family:'Cormorant Garamond',serif;font-size:17px;color:#6b4f30;font-weight:500;font-style:italic}
+    #njl-quiz .irow{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+    #njl-quiz .ichip{padding:8px 20px;border:1px solid #ede4d4;border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:15px;color:#6b4f30;font-style:italic;background:#fdfaf6}
+    #njl-quiz .bwrap{background:#f7f1e8;border:1px solid #ede4d4;border-radius:2px;padding:22px 24px;margin-bottom:26px}
+    #njl-quiz .bhead{font-size:9px;letter-spacing:.36em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+    #njl-quiz .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    #njl-quiz .bitem{display:flex;align-items:center;gap:9px}
+    #njl-quiz .bdot{width:4px;height:4px;border-radius:50%;background:#c09060;flex-shrink:0}
+    #njl-quiz .btxt{font-size:12px;color:#6b4f30;font-weight:400;line-height:1.4}
+    #njl-quiz .pbox{background:linear-gradient(155deg,#f7f1e8,#ede4d4);border:1px solid #ddd0b8;border-radius:2px;padding:30px 24px;text-align:center;margin-bottom:12px}
+    #njl-quiz .peye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+    #njl-quiz .pnum{font-family:'Cormorant Garamond',serif;font-size:68px;color:#2e1f0e;font-weight:500;line-height:1;margin-bottom:8px}
+    #njl-quiz .pnum sup{font-size:30px;vertical-align:super}
+    #njl-quiz .pnote{font-size:12px;color:#a08060;font-weight:300;line-height:1.7;margin-bottom:22px}
+    #njl-quiz .pnote em{color:#c09060;font-style:normal;font-weight:500}
+    #njl-quiz .cnsbox{border:1px dashed #ddd0b8;border-radius:2px;padding:22px;text-align:center;margin-top:12px}
+    #njl-quiz .cnstxt{font-size:12px;color:#c8b090;font-weight:300;line-height:1.65;margin-bottom:14px}
+    @media(max-width:480px){
+      #njl-quiz .bgrid{grid-template-columns:1fr}
+      #njl-quiz .qcard,#njl-quiz .cblock,#njl-quiz .rbody{padding:26px 18px}
+      #njl-quiz .rhero{padding:30px 18px}
+    }
+  </style>
+</head>
+<body>
 
 <div id="njl-quiz">
 
@@ -119,7 +191,7 @@
         <input class="finp" type="tel" id="nq-phone" placeholder="Phone number">
         <input class="finp" type="email" id="nq-email" placeholder="Email address">
       </div>
-      <div id="nq-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:10px;font-weight:400;">Please enter your name and email.</div>
+      <div id="nq-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:10px;font-weight:400;">Please enter your name and valid email.</div>
       <label class="chk"><input type="checkbox" checked><span>I agree to receive personalized offers from notJUSTLIPS New York</span></label>
       <button class="btn btnp btnb" id="nq-submitbtn" onclick="njlSubmit()">Show My Result</button>
     </div>
@@ -151,11 +223,11 @@
         <div class="peye">Special Promo Price · Quiz Exclusive</div>
         <div class="pnum"><sup>$</sup>500</div>
         <p class="pnote">Regular price is higher.<br><em>This promotion is available for a limited number of appointments.</em></p>
-        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btnp btnb">Book Your Slot</a>
+        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btnp btnb" onclick="njlBookClick(event)">Book Your Slot</a>
       </div>
       <div class="cnsbox">
         <p class="cnstxt">Not sure yet?<br>You can also book a free consultation.</p>
-        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btng">Free Consultation</a>
+        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btng" onclick="njlConsultClick(event)">Free Consultation</a>
       </div>
     </div>
   </div>
@@ -164,107 +236,207 @@
 
 <script>
 (function(){
-var QS=[
-  {q:"Have you ever had lip fillers before?",o:["No, this will be my first time","Yes, once or twice","Yes, I do them regularly"]},
-  {q:"Did you ever experience any issues after lip fillers?",o:["No, everything healed well","I had bruising or swelling","I had uneven results or asymmetry"]},
-  {q:"Do you currently see any lip asymmetry?",o:["No","A little bit","Yes, it's noticeable"]},
-  {q:"What type of result do you want?",o:["Natural elegant lips","More volume but still natural","Doll-like lips with a defined shape"]},
-  {q:"What budget are you comfortable with?",o:["$400-$600","$600-$800","$800+"]},
-  {q:"How soon would you like to do the procedure?",o:["As soon as possible","Within the next few weeks","Just exploring options for now"]}
-];
-var qi=0,ans=[],sel=null;
-function swap(a,b){
-  document.getElementById(a).classList.remove('on');
-  document.getElementById(b).classList.add('on');
-  document.getElementById('njl-quiz').scrollIntoView({behavior:'smooth'});
-}
-window.njlGo=function(){qi=0;ans=[];render();swap('nq-start','nq-q')};
-function render(){
-  sel=null;
-  var d=QS[qi],pct=Math.round(qi/QS.length*100);
-  document.getElementById('nqEye').textContent='Question '+String(qi+1).padStart(2,'0');
-  document.getElementById('nqTit').textContent=d.q;
-  document.getElementById('nqLbl').textContent='Question '+(qi+1)+' of '+QS.length;
-  document.getElementById('nqPct').textContent=pct+'%';
-  document.getElementById('nqFill').style.width=pct+'%';
-  document.getElementById('nqNext').classList.remove('on');
-  var w=document.getElementById('nqOpts');w.innerHTML='';
-  ['A','B','C'].forEach(function(l,i){
-    var el=document.createElement('div');
-    el.className='opt';
-    el.innerHTML='<div class="optl">'+l+'</div><div class="optt">'+d.o[i]+'</div>';
-    el.onclick=function(){
-      document.querySelectorAll('#njl-quiz .opt').forEach(function(x){x.classList.remove('sel')});
-      el.classList.add('sel');sel=i;
-      document.getElementById('nqNext').classList.add('on');
-    };
-    w.appendChild(el);
-  });
-}
-window.njlNext=function(){
-  if(sel===null)return;
-  ans.push(sel);qi++;
-  if(qi<QS.length){render();}
-  else{
-    document.getElementById('nqFill').style.width='100%';
-    document.getElementById('nqPct').textContent='100%';
-    swap('nq-q','nq-contact');
+  var QS = [
+    {q:"Have you ever had lip fillers before?",o:["No, this will be my first time","Yes, once or twice","Yes, I do them regularly"]},
+    {q:"Did you ever experience any issues after lip fillers?",o:["No, everything healed well","I had bruising or swelling","I had uneven results or asymmetry"]},
+    {q:"Do you currently see any lip asymmetry?",o:["No","A little bit","Yes, it's noticeable"]},
+    {q:"What type of result do you want?",o:["Natural elegant lips","More volume but still natural","Doll-like lips with a defined shape"]},
+    {q:"What budget are you comfortable with?",o:["$400-$600","$600-$800","$800+"]},
+    {q:"How soon would you like to do the procedure?",o:["As soon as possible","Within the next few weeks","Just exploring options for now"]}
+  ];
+
+  var qi = 0;
+  var ans = [];
+  var sel = null;
+
+  function swap(fromId, toId){
+    document.getElementById(fromId).classList.remove('on');
+    document.getElementById(toId).classList.add('on');
+    document.getElementById('njl-quiz').scrollIntoView({behavior:'smooth'});
   }
-};
-window.njlResult=function(){
-  var a=ans;
-  var vol='1 ml - Russian Lips';
-  if(a[2]===2||a[1]===2)vol='1 ml - Russian Lips with correction';
-  else if(a[3]===2)vol='1 ml - Russian Lips with enhanced shape';
-  else if(a[0]===0&&a[3]===0)vol='0.7 ml - Russian Lips';
-  document.getElementById('nqVol').textContent=vol;
-  swap('nq-contact','nq-result');
-};
-window.njlSubmit=function(){
-  var name=document.getElementById('nq-name').value.trim();
-  var email=document.getElementById('nq-email').value.trim();
-  var phone=document.getElementById('nq-phone').value.trim();
-  var err=document.getElementById('nq-err');
-  var btn=document.getElementById('nq-submitbtn');
-  if(!name||!email||email.indexOf('@')===-1){err.style.display='block';return;}
-  err.style.display='none';
-  btn.textContent='Loading...';
-  btn.disabled=true;
-  var a=ans;
-  var vol='1 ml - Russian Lips';
-  if(a[2]===2||a[1]===2)vol='1 ml - Russian Lips with correction';
-  else if(a[3]===2)vol='1 ml - Russian Lips with enhanced shape';
-  else if(a[0]===0&&a[3]===0)vol='0.7 ml - Russian Lips';
-  document.getElementById('nqVol').textContent=vol;
-  var nameParts=name.split(' ');
-  var fname=nameParts[0]||name;
-  var lname=nameParts.slice(1).join(' ')||'';
-  var iframe=document.getElementById('mc_iframe');
-  if(!iframe){iframe=document.createElement('iframe');iframe.name='mc_iframe';iframe.id='mc_iframe';iframe.style.display='none';document.body.appendChild(iframe);}
-  var f=document.createElement('form');
-  f.action='https://online.us22.list-manage.com/subscribe/post?u=c56fdb996cd28b105e16fc61f&id=c49bd62fae&f_id=00a2dbe1f0';
-  f.method='POST';
-  f.target='mc_iframe';
-  f.style.display='none';
-  var data={'EMAIL':email,'FNAME':fname,'LNAME':lname,'PHONE':phone,'b_c56fdb996cd28b105e16fc61f_c49bd62fae':''};
-  Object.keys(data).forEach(function(k){var i=document.createElement('input');i.type='hidden';i.name=k;i.value=data[k];f.appendChild(i);});
-  document.body.appendChild(f);
-  f.submit();
-  setTimeout(function(){if(f.parentNode)f.parentNode.removeChild(f);},3000);
-  setTimeout(function(){
-    btn.textContent='Show My Result';
-    btn.disabled=false;
-    swap('nq-contact','nq-result');
-    if(window.fbq){
-      fbq('track','Lead',{content_name:'Lip Quiz'});
-      fbq('track','CompleteRegistration',{content_name:'Lip Quiz'});
+
+  function getVolumeRecommendation() {
+    var vol = '1 ml - Russian Lips';
+    if (ans[2] === 2 || ans[1] === 2) {
+      vol = '1 ml - Russian Lips with correction';
+    } else if (ans[3] === 2) {
+      vol = '1 ml - Russian Lips with enhanced shape';
+    } else if (ans[0] === 0 && ans[3] === 0) {
+      vol = '0.7 ml - Russian Lips';
     }
-  },1500);
-};
+    return vol;
+  }
+
+  function render(){
+    sel = null;
+    var d = QS[qi];
+    var pct = Math.round((qi / QS.length) * 100);
+
+    document.getElementById('nqEye').textContent = 'Question ' + String(qi + 1).padStart(2, '0');
+    document.getElementById('nqTit').textContent = d.q;
+    document.getElementById('nqLbl').textContent = 'Question ' + (qi + 1) + ' of ' + QS.length;
+    document.getElementById('nqPct').textContent = pct + '%';
+    document.getElementById('nqFill').style.width = pct + '%';
+    document.getElementById('nqNext').classList.remove('on');
+
+    var w = document.getElementById('nqOpts');
+    w.innerHTML = '';
+
+    ['A','B','C'].forEach(function(l, i){
+      var el = document.createElement('div');
+      el.className = 'opt';
+      el.innerHTML = '<div class="optl">' + l + '</div><div class="optt">' + d.o[i] + '</div>';
+
+      el.onclick = function(){
+        document.querySelectorAll('#njl-quiz .opt').forEach(function(x){
+          x.classList.remove('sel');
+        });
+        el.classList.add('sel');
+        sel = i;
+        document.getElementById('nqNext').classList.add('on');
+      };
+
+      w.appendChild(el);
+    });
+  }
+
+  window.njlGo = function(){
+    qi = 0;
+    ans = [];
+    render();
+    swap('nq-start','nq-q');
+    trackMetaCustom('QuizStarted', { quiz_name: 'Lip Quiz' });
+  };
+
+  window.njlNext = function(){
+    if (sel === null) return;
+
+    ans.push(sel);
+    qi++;
+
+    if (qi < QS.length) {
+      render();
+    } else {
+      document.getElementById('nqFill').style.width = '100%';
+      document.getElementById('nqPct').textContent = '100%';
+      swap('nq-q','nq-contact');
+      trackMetaCustom('QuizReachedContact', {
+        quiz_name: 'Lip Quiz',
+        questions_completed: QS.length
+      });
+    }
+  };
+
+  window.njlSubmit = function(){
+    var name = document.getElementById('nq-name').value.trim();
+    var email = document.getElementById('nq-email').value.trim();
+    var phone = document.getElementById('nq-phone').value.trim();
+    var err = document.getElementById('nq-err');
+    var btn = document.getElementById('nq-submitbtn');
+
+    if (!name || !email || email.indexOf('@') === -1) {
+      err.style.display = 'block';
+      trackMetaCustom('QuizValidationError', { quiz_name: 'Lip Quiz' });
+      return;
+    }
+
+    err.style.display = 'none';
+    btn.textContent = 'Loading...';
+    btn.disabled = true;
+
+    var vol = getVolumeRecommendation();
+    document.getElementById('nqVol').textContent = vol;
+
+    var nameParts = name.split(' ');
+    var fname = nameParts[0] || name;
+    var lname = nameParts.slice(1).join(' ') || '';
+
+    try {
+      var iframe = document.getElementById('mc_iframe');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = 'mc_iframe';
+        iframe.id = 'mc_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+      }
+
+      var f = document.createElement('form');
+      f.action = 'https://online.us22.list-manage.com/subscribe/post?u=c56fdb996cd28b105e16fc61f&id=c49bd62fae&f_id=00a2dbe1f0';
+      f.method = 'POST';
+      f.target = 'mc_iframe';
+      f.style.display = 'none';
+
+      var data = {
+        'EMAIL': email,
+        'FNAME': fname,
+        'LNAME': lname,
+        'PHONE': phone,
+        'b_c56fdb996cd28b105e16fc61f_c49bd62fae': ''
+      };
+
+      Object.keys(data).forEach(function(k){
+        var i = document.createElement('input');
+        i.type = 'hidden';
+        i.name = k;
+        i.value = data[k];
+        f.appendChild(i);
+      });
+
+      document.body.appendChild(f);
+      f.submit();
+
+      setTimeout(function(){
+        if (f.parentNode) {
+          f.parentNode.removeChild(f);
+        }
+      }, 3000);
+    } catch (e) {
+      console.error('Mailchimp submit error:', e);
+    }
+
+    setTimeout(function(){
+      btn.textContent = 'Show My Result';
+      btn.disabled = false;
+      swap('nq-contact','nq-result');
+
+      trackMeta('Lead', {
+        content_name: 'Lip Quiz',
+        recommended_volume: vol
+      });
+
+      trackMeta('CompleteRegistration', {
+        content_name: 'Lip Quiz',
+        status: 'completed',
+        recommended_volume: vol
+      });
+
+      trackMetaCustom('QuizResultShown', {
+        quiz_name: 'Lip Quiz',
+        recommended_volume: vol
+      });
+    }, 1500);
+  };
+
+  window.njlBookClick = function(){
+    trackMeta('InitiateCheckout', {
+      content_name: 'Lip Quiz Booking',
+      value: 500,
+      currency: 'USD'
+    });
+
+    trackMetaCustom('BookSlotClick', {
+      quiz_name: 'Lip Quiz'
+    });
+  };
+
+  window.njlConsultClick = function(){
+    trackMetaCustom('ConsultationClick', {
+      quiz_name: 'Lip Quiz'
+    });
+  };
 })();
 </script>
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','382002759543740');
-fbq('track','PageView');
-</script>
+
+</body>
+</html>
