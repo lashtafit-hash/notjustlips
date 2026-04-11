@@ -1,616 +1,270 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>notJUSTLIPS New York — Lip Shape Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:      #fdfaf6;
-  --s1:      #f7f1e8;
-  --s2:      #ede4d4;
-  --s3:      #ddd0b8;
-  --s4:      #c8b090;
-  --s5:      #a08060;
-  --s6:      #6b4f30;
-  --ink:     #2e1f0e;
-  --gold:    #c09060;
-  --gold2:   #e8d5b0;
-  --rose:    #d4b0aa;
-  --roselt:  #f2e8e6;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* ─── HEADER ─── */
-.hdr {
-  width: 100%;
-  background: var(--s1);
-  border-bottom: 1px solid var(--s3);
-  text-align: center;
-  padding: 32px 20px 26px;
-}
-.hdr-not {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(15px, 3.5vw, 22px);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--s5);
-  letter-spacing: 0.04em;
-  display: block;
-  line-height: 1;
-  margin-bottom: -2px;
-}
-.hdr-main {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 7vw, 48px);
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 0.12em;
-  line-height: 1;
-  display: block;
-}
-.hdr-city {
-  font-size: 9px;
-  letter-spacing: 0.5em;
-  color: var(--s4);
-  font-weight: 400;
-  text-transform: uppercase;
-  margin-top: 8px;
-  display: block;
-}
-.hdr-rule {
-  width: 40px; height: 1px;
-  background: var(--gold2);
-  margin: 14px auto 0;
-}
-
-/* ─── WRAP ─── */
-.wrap {
-  width: 100%;
-  max-width: 660px;
-  padding: 0 18px 80px;
-}
-
-.screen { display: none; animation: rise .45s ease both; }
-.screen.active { display: block; }
-@keyframes rise {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── START ─── */
-.start {
-  padding-top: 52px;
-  text-align: center;
-}
-.start-tag {
-  display: inline-block;
-  font-size: 9px;
-  letter-spacing: 0.38em;
-  color: var(--s5);
-  text-transform: uppercase;
-  font-weight: 500;
-  border-bottom: 1px solid var(--gold2);
-  padding-bottom: 6px;
-  margin-bottom: 32px;
-}
-.start-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(34px, 7.5vw, 56px);
-  color: var(--ink);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.1;
-  margin-bottom: 8px;
-}
-.start-h1 strong {
-  font-weight: 600;
-  font-style: normal;
-  color: var(--gold);
-  display: block;
-}
-.orn {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--gold2);
-  font-size: 22px;
-  letter-spacing: 8px;
-  margin: 18px 0;
-  display: block;
-}
-.start-sub {
-  font-size: 13px;
-  color: var(--s5);
-  line-height: 1.85;
-  font-weight: 300;
-  max-width: 430px;
-  margin: 0 auto 10px;
-}
-.start-promo {
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  margin-bottom: 40px;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 16px;
-}
-
-/* ─── BUTTONS ─── */
-.btn {
-  display: inline-block;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.36em;
-  font-weight: 600;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  border-radius: 1px;
-  transition: opacity .2s, transform .2s;
-}
-.btn:hover { opacity: .82; transform: translateY(-1px); }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--s6) 100%);
-  color: #fff;
-  padding: 18px 52px;
-}
-.btn-block { display: block; width: 100%; text-align: center; padding: 18px; }
-
-.btn-ghost {
-  background: transparent;
-  color: var(--s6);
-  padding: 14px 34px;
-  border: 1.5px solid var(--s3);
-}
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-/* ─── PROGRESS ─── */
-.prog-wrap { padding-top: 38px; margin-bottom: 26px; }
-.prog-row { display: flex; justify-content: space-between; margin-bottom: 9px; }
-.prog-lbl { font-size: 9.5px; letter-spacing: 0.24em; color: var(--s4); text-transform: uppercase; font-weight: 500; }
-.prog-pct { font-size: 9.5px; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; }
-.prog-track { width: 100%; height: 1.5px; background: var(--s2); overflow: hidden; }
-.prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold2), var(--gold)); transition: width .55s ease; }
-
-/* ─── Q CARD ─── */
-.qcard {
-  background: #fff;
-  border: 1px solid var(--s2);
-  border-radius: 2px;
-  padding: 48px 44px 42px;
-  box-shadow: 0 8px 48px rgba(160,128,80,.07), 0 1px 4px rgba(160,128,80,.04);
-}
-.q-eye {
-  font-size: 9px;
-  letter-spacing: 0.42em;
-  color: var(--gold);
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 18px;
-}
-.q-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(22px, 4.5vw, 32px);
-  color: var(--ink);
-  font-weight: 400;
-  line-height: 1.3;
-  margin-bottom: 34px;
-}
-
-.opts { display: flex; flex-direction: column; gap: 10px; }
-.opt {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 17px 22px;
-  border: 1px solid var(--s2);
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all .2s;
-  background: var(--bg);
-}
-.opt:hover { border-color: var(--gold2); background: var(--s1); }
-.opt.sel { border-color: var(--gold); background: linear-gradient(135deg,#fdf8ef,#f8edda); }
-
-.opt-l {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--s3);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; font-weight: 500; font-style: italic;
-  color: var(--s5);
-  flex-shrink: 0;
-  transition: all .2s;
-}
-.opt.sel .opt-l { background: var(--gold); border-color: var(--gold); color: #fff; font-style: normal; }
-
-.opt-t {
-  font-size: 13.5px;
-  color: var(--ink);
-  font-weight: 300;
-  line-height: 1.45;
-  flex: 1;
-}
-.opt.sel .opt-t { font-weight: 400; color: var(--s6); }
-
-.q-nav { display: flex; justify-content: flex-end; margin-top: 32px; }
-.btn-next {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9.5px; letter-spacing: 0.34em; font-weight: 600; text-transform: uppercase;
-  padding: 14px 32px;
-  border: none; border-radius: 1px; cursor: pointer;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--s6) 100%);
-  color: #fff;
-  transition: opacity .2s;
-  opacity: .28; pointer-events: none;
-}
-.btn-next.on { opacity: 1; pointer-events: all; }
-.btn-next.on:hover { opacity: .84; }
-
-/* ─── CONTACT ─── */
-.cblock {
-  margin-top: 40px;
-  background: #fff;
-  border: 1px solid var(--s2);
-  border-radius: 2px;
-  padding: 52px 44px 48px;
-  box-shadow: 0 8px 48px rgba(160,128,80,.07);
-}
-.c-eye { font-size: 9px; letter-spacing: 0.42em; color: var(--gold); text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
-.c-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(26px, 5.5vw, 38px);
-  color: var(--ink);
-  font-weight: 400; font-style: italic;
-  line-height: 1.2; margin-bottom: 12px;
-}
-.c-sub { font-size: 13px; color: var(--s5); line-height: 1.75; font-weight: 300; margin-bottom: 34px; }
-.c-sub em { color: var(--gold); font-style: normal; font-weight: 500; }
-
-.fields { display: flex; flex-direction: column; gap: 13px; margin-bottom: 16px; }
-.finp {
-  width: 100%; padding: 15px 20px;
-  border: 1px solid var(--s2); border-radius: 2px;
-  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300;
-  color: var(--ink); background: var(--bg); outline: none;
-  transition: border-color .2s;
-}
-.finp::placeholder { color: var(--s3); }
-.finp:focus { border-color: var(--gold); background: #fff; }
-
-.chk { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 28px; cursor: pointer; }
-.chk input { margin-top: 3px; accent-color: var(--gold); }
-.chk span { font-size: 11.5px; color: var(--s4); line-height: 1.65; font-weight: 300; }
-
-/* ─── RESULT ─── */
-.res-hero {
-  margin-top: 40px;
-  background: linear-gradient(160deg, var(--s1) 0%, var(--s2) 55%, var(--s3) 100%);
-  border: 1px solid var(--s3);
-  border-radius: 2px 2px 0 0;
-  padding: 52px 44px 46px;
-  text-align: center;
-  position: relative; overflow: hidden;
-}
-.res-hero::after {
-  content: '';
-  position: absolute; bottom: -50px; right: -50px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: rgba(192,144,96,.07);
-  pointer-events: none;
-}
-.res-eye { font-size: 9px; letter-spacing: 0.42em; color: var(--gold); text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
-.res-into { font-size: 12px; color: var(--s5); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 300; margin-bottom: 6px; }
-.res-tech {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 10vw, 66px);
-  color: var(--ink);
-  font-weight: 500; font-style: italic;
-  line-height: 1.05; margin-bottom: 24px;
-}
-.res-rule { width: 44px; height: 1px; background: var(--gold2); margin: 0 auto 20px; }
-.res-desc { font-size: 13px; color: var(--s6); line-height: 1.8; font-weight: 300; max-width: 420px; margin: 0 auto; }
-
-.res-body {
-  background: #fff;
-  border: 1px solid var(--s2); border-top: none;
-  border-radius: 0 0 2px 2px;
-  padding: 40px 44px 44px;
-  box-shadow: 0 8px 48px rgba(160,128,80,.07);
-}
-.sec-lbl { font-size: 9px; letter-spacing: 0.38em; color: var(--s4); text-transform: uppercase; font-weight: 600; margin-bottom: 13px; display: block; }
-
-.vol-pill {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--s1); border: 1px solid var(--gold2);
-  border-radius: 50px; padding: 11px 24px; margin-bottom: 32px;
-}
-.vol-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-.vol-txt { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--s6); font-weight: 500; font-style: italic; }
-
-.inj-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
-.inj-chip {
-  padding: 9px 22px;
-  border: 1px solid var(--s2); border-radius: 50px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; color: var(--s6); font-weight: 400; font-style: italic;
-  background: var(--bg);
-  transition: border-color .2s;
-}
-.inj-chip:hover { border-color: var(--gold2); }
-
-/* Benefits */
-.ben-wrap {
-  background: var(--s1); border: 1px solid var(--s2);
-  border-radius: 2px; padding: 24px 26px; margin-bottom: 32px;
-}
-.ben-head { font-size: 9px; letter-spacing: 0.38em; color: var(--gold); text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
-.ben-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-.ben-item { display: flex; align-items: center; gap: 10px; }
-.ben-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-.ben-txt { font-size: 12px; color: var(--s6); font-weight: 400; line-height: 1.4; }
-
-/* Price */
-.price-box {
-  background: linear-gradient(155deg, var(--s1) 0%, var(--s2) 100%);
-  border: 1px solid var(--s3);
-  border-radius: 2px; padding: 36px 32px 32px; text-align: center; margin-bottom: 14px;
-}
-.price-eye { font-size: 9px; letter-spacing: 0.42em; color: var(--gold); text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
-.price-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px; color: var(--ink); font-weight: 500; line-height: 1; margin-bottom: 10px;
-}
-.price-num sup { font-size: 32px; vertical-align: super; }
-.price-note { font-size: 12px; color: var(--s5); font-weight: 300; line-height: 1.7; margin-bottom: 26px; }
-.price-note em { color: var(--gold); font-style: normal; font-weight: 500; }
-
-.consult-box {
-  border: 1px dashed var(--s3); border-radius: 2px;
-  padding: 24px; text-align: center; margin-top: 14px;
-}
-.consult-txt { font-size: 12.5px; color: var(--s4); font-weight: 300; line-height: 1.65; margin-bottom: 16px; }
-
-/* ─── FOOTER ─── */
-.ftr {
-  width: 100%;
-  background: var(--s1); border-top: 1px solid var(--s3);
-  padding: 30px 20px; text-align: center; margin-top: 60px;
-}
-.ftr-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; font-style: italic; color: var(--s6); margin-bottom: 10px; font-weight: 400;
-}
-.ftr-rule { width: 28px; height: 1px; background: var(--gold2); margin: 0 auto 10px; }
-.ftr-addr { font-size: 11px; color: var(--s4); line-height: 2; font-weight: 300; letter-spacing: 0.06em; }
-.ftr-addr a { color: var(--gold); text-decoration: none; }
-.ftr-addr a:hover { color: var(--s6); }
-
-@media (max-width: 520px) {
-  .qcard, .cblock, .res-body { padding: 30px 22px 28px; }
-  .res-hero { padding: 36px 22px 32px; }
-  .price-box { padding: 28px 20px 24px; }
-  .ben-grid { grid-template-columns: 1fr; }
-}
+#njl-quiz*{box-sizing:border-box;margin:0;padding:0}
+#njl-quiz{font-family:'Montserrat',sans-serif;background:#fdfaf6;padding:0 0 40px;--bg:#fdfaf6;--s1:#f7f1e8;--s2:#ede4d4;--s3:#ddd0b8;--s4:#c8b090;--s5:#a08060;--s6:#6b4f30;--ink:#2e1f0e;--gold:#c09060;--gold2:#e8d5b0}
+#njl-quiz .scr{display:none}
+#njl-quiz .scr.on{display:block;animation:njlrise .4s ease both}
+@keyframes njlrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+#njl-quiz .start{text-align:center;padding:36px 16px 20px}
+#njl-quiz .stag{display:inline-block;font-size:9px;letter-spacing:.38em;color:#a08060;text-transform:uppercase;font-weight:500;border-bottom:1px solid #e8d5b0;padding-bottom:6px;margin-bottom:28px}
+#njl-quiz .sh1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.1;margin-bottom:6px}
+#njl-quiz .sh1 strong{font-weight:600;font-style:normal;color:#c09060;display:block}
+#njl-quiz .orn{font-family:'Cormorant Garamond',serif;color:#e8d5b0;font-size:20px;letter-spacing:8px;margin:14px 0;display:block}
+#njl-quiz .ssub{font-size:13px;color:#a08060;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto 8px}
+#njl-quiz .spromo{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:#c09060;font-weight:500;margin-bottom:32px}
+#njl-quiz .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.34em;font-weight:600;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;transition:opacity .2s,transform .2s;text-decoration:none}
+#njl-quiz .btn:hover{opacity:.82;transform:translateY(-1px)}
+#njl-quiz .btnp{background:linear-gradient(135deg,#c09060 0%,#6b4f30 100%);color:#fff;padding:17px 46px}
+#njl-quiz .btnb{display:block;width:100%;text-align:center;padding:17px}
+#njl-quiz .btng{background:transparent;color:#6b4f30;padding:13px 30px;border:1.5px solid #ddd0b8}
+#njl-quiz .btng:hover{border-color:#c09060;color:#c09060}
+#njl-quiz .prog{padding-top:28px;margin-bottom:20px}
+#njl-quiz .prow{display:flex;justify-content:space-between;margin-bottom:8px}
+#njl-quiz .plbl{font-size:9px;letter-spacing:.22em;color:#c8b090;text-transform:uppercase;font-weight:500}
+#njl-quiz .ppct{font-size:9px;color:#c09060;font-weight:600}
+#njl-quiz .ptrack{width:100%;height:1.5px;background:#ede4d4;overflow:hidden}
+#njl-quiz .pfill{height:100%;background:linear-gradient(90deg,#e8d5b0,#c09060);transition:width .5s ease}
+#njl-quiz .qcard{background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+#njl-quiz .qeye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+#njl-quiz .qtit{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4.5vw,30px);color:#2e1f0e;font-weight:400;line-height:1.3;margin-bottom:28px}
+#njl-quiz .opts{display:flex;flex-direction:column;gap:9px}
+#njl-quiz .opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;cursor:pointer;transition:all .2s;background:#fdfaf6}
+#njl-quiz .opt:hover{border-color:#e8d5b0;background:#f7f1e8}
+#njl-quiz .opt.sel{border-color:#c09060;background:linear-gradient(135deg,#fdf8ef,#f8edda)}
+#njl-quiz .optl{width:32px;height:32px;border-radius:50%;border:1px solid #ddd0b8;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;font-style:italic;color:#a08060;flex-shrink:0;transition:all .2s}
+#njl-quiz .opt.sel .optl{background:#c09060;border-color:#c09060;color:#fff;font-style:normal}
+#njl-quiz .optt{font-size:13px;color:#2e1f0e;font-weight:300;line-height:1.4;flex:1}
+#njl-quiz .opt.sel .optt{font-weight:400;color:#6b4f30}
+#njl-quiz .qnav{display:flex;justify-content:flex-end;margin-top:26px}
+#njl-quiz .bnxt{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.32em;font-weight:600;text-transform:uppercase;padding:13px 28px;border:none;border-radius:1px;cursor:pointer;background:linear-gradient(135deg,#c09060,#6b4f30);color:#fff;transition:opacity .2s;opacity:.25;pointer-events:none}
+#njl-quiz .bnxt.on{opacity:1;pointer-events:all}
+#njl-quiz .cblock{margin-top:28px;background:#fff;border:1px solid #ede4d4;border-radius:2px;padding:36px 28px 32px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+#njl-quiz .ceye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+#njl-quiz .ctit{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,36px);color:#2e1f0e;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:10px}
+#njl-quiz .csub{font-size:13px;color:#a08060;line-height:1.75;font-weight:300;margin-bottom:28px}
+#njl-quiz .csub em{color:#c09060;font-style:normal;font-weight:500}
+#njl-quiz .fields{display:flex;flex-direction:column;gap:11px;margin-bottom:14px}
+#njl-quiz .finp{width:100%;padding:14px 18px;border:1px solid #ede4d4;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;color:#2e1f0e;background:#fdfaf6;outline:none;transition:border-color .2s}
+#njl-quiz .finp::placeholder{color:#ddd0b8}
+#njl-quiz .finp:focus{border-color:#c09060;background:#fff}
+#njl-quiz .chk{display:flex;align-items:flex-start;gap:10px;margin-bottom:24px;cursor:pointer}
+#njl-quiz .chk input{margin-top:3px;accent-color:#c09060}
+#njl-quiz .chk span{font-size:11px;color:#c8b090;line-height:1.6;font-weight:300}
+#njl-quiz .rhero{margin-top:28px;background:linear-gradient(160deg,#f7f1e8,#ede4d4 55%,#ddd0b8);border:1px solid #ddd0b8;border-radius:2px 2px 0 0;padding:40px 28px 36px;text-align:center}
+#njl-quiz .reye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+#njl-quiz .rinto{font-size:11px;color:#a08060;letter-spacing:.1em;text-transform:uppercase;font-weight:300;margin-bottom:4px}
+#njl-quiz .rtech{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,9vw,60px);color:#2e1f0e;font-weight:500;font-style:italic;line-height:1.05;margin-bottom:20px}
+#njl-quiz .rrule{width:40px;height:1px;background:#e8d5b0;margin:0 auto 18px}
+#njl-quiz .rdesc{font-size:13px;color:#6b4f30;line-height:1.8;font-weight:300;max-width:380px;margin:0 auto}
+#njl-quiz .rbody{background:#fff;border:1px solid #ede4d4;border-top:none;border-radius:0 0 2px 2px;padding:32px 28px 36px;box-shadow:0 8px 40px rgba(160,128,80,.07)}
+#njl-quiz .slbl{font-size:9px;letter-spacing:.36em;color:#c8b090;text-transform:uppercase;font-weight:600;margin-bottom:11px;display:block}
+#njl-quiz .vpill{display:inline-flex;align-items:center;gap:9px;background:#f7f1e8;border:1px solid #e8d5b0;border-radius:50px;padding:10px 22px;margin-bottom:26px}
+#njl-quiz .vdot{width:7px;height:7px;border-radius:50%;background:#c09060;flex-shrink:0}
+#njl-quiz .vtxt{font-family:'Cormorant Garamond',serif;font-size:17px;color:#6b4f30;font-weight:500;font-style:italic}
+#njl-quiz .irow{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+#njl-quiz .ichip{padding:8px 20px;border:1px solid #ede4d4;border-radius:50px;font-family:'Cormorant Garamond',serif;font-size:15px;color:#6b4f30;font-style:italic;background:#fdfaf6}
+#njl-quiz .bwrap{background:#f7f1e8;border:1px solid #ede4d4;border-radius:2px;padding:22px 24px;margin-bottom:26px}
+#njl-quiz .bhead{font-size:9px;letter-spacing:.36em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+#njl-quiz .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#njl-quiz .bitem{display:flex;align-items:center;gap:9px}
+#njl-quiz .bdot{width:4px;height:4px;border-radius:50%;background:#c09060;flex-shrink:0}
+#njl-quiz .btxt{font-size:12px;color:#6b4f30;font-weight:400;line-height:1.4}
+#njl-quiz .pbox{background:linear-gradient(155deg,#f7f1e8,#ede4d4);border:1px solid #ddd0b8;border-radius:2px;padding:30px 24px;text-align:center;margin-bottom:12px}
+#njl-quiz .peye{font-size:9px;letter-spacing:.4em;color:#c09060;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+#njl-quiz .pnum{font-family:'Cormorant Garamond',serif;font-size:68px;color:#2e1f0e;font-weight:500;line-height:1;margin-bottom:8px}
+#njl-quiz .pnum sup{font-size:30px;vertical-align:super}
+#njl-quiz .pnote{font-size:12px;color:#a08060;font-weight:300;line-height:1.7;margin-bottom:22px}
+#njl-quiz .pnote em{color:#c09060;font-style:normal;font-weight:500}
+#njl-quiz .cnsbox{border:1px dashed #ddd0b8;border-radius:2px;padding:22px;text-align:center;margin-top:12px}
+#njl-quiz .cnstxt{font-size:12px;color:#c8b090;font-weight:300;line-height:1.65;margin-bottom:14px}
+@media(max-width:480px){#njl-quiz .bgrid{grid-template-columns:1fr}#njl-quiz .qcard,#njl-quiz .cblock,#njl-quiz .rbody{padding:26px 18px}#njl-quiz .rhero{padding:30px 18px}}
 </style>
-</head>
-<body>
 
-<!-- HEADER -->
-<header class="hdr">
-  <span class="hdr-not">not</span>
-  <span class="hdr-main">JUSTLIPS</span>
-  <span class="hdr-city">New &nbsp;York</span>
-  <div class="hdr-rule"></div>
-</header>
+<div id="njl-quiz">
 
-<div class="wrap">
-
-  <!-- ══ START ══ -->
-  <div class="screen active" id="s-start">
+  <div class="scr on" id="nq-start">
     <div class="start">
-      <div class="start-tag">Personalized Lip Analysis</div>
-      <h1 class="start-h1">
-        Find your perfect<br>
-        <strong>lip shape</strong>
-        in 30 seconds
-      </h1>
+      <div class="stag">Personalized Lip Analysis</div>
+      <h2 class="sh1">Find your perfect<br><strong>lip shape</strong>in 30 seconds</h2>
       <span class="orn">— ✦ —</span>
-      <p class="start-sub">Answer a few quick questions and discover which lip technique will give you the best result.</p>
-      <p class="start-promo">You'll also unlock a special promo price at the end.</p>
-      <button class="btn btn-primary" onclick="go0()">Start Quiz</button>
+      <p class="ssub">Answer a few quick questions and discover which lip technique will give you the best result.</p>
+      <p class="spromo">You'll also unlock a special promo price at the end.</p>
+      <button class="btn btnp" onclick="njlGo()">Start Quiz</button>
     </div>
   </div>
 
-  <!-- ══ QUESTIONS ══ -->
-  <div class="screen" id="s-q">
-    <div class="prog-wrap">
-      <div class="prog-row">
-        <span class="prog-lbl" id="pLbl">Question 1 of 6</span>
-        <span class="prog-pct" id="pPct">0%</span>
+  <div class="scr" id="nq-q">
+    <div class="prog">
+      <div class="prow">
+        <span class="plbl" id="nqLbl">Question 1 of 6</span>
+        <span class="ppct" id="nqPct">0%</span>
       </div>
-      <div class="prog-track"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
+      <div class="ptrack"><div class="pfill" id="nqFill" style="width:0%"></div></div>
     </div>
     <div class="qcard">
-      <div class="q-eye" id="qEye">Question 01</div>
-      <div class="q-title" id="qTitle"></div>
-      <div class="opts" id="qOpts"></div>
-      <div class="q-nav">
-        <button class="btn-next" id="btnNext" onclick="nextQ()">Continue &rarr;</button>
-      </div>
+      <div class="qeye" id="nqEye">Question 01</div>
+      <div class="qtit" id="nqTit"></div>
+      <div class="opts" id="nqOpts"></div>
+      <div class="qnav"><button class="bnxt" id="nqNext" onclick="njlNext()">Continue →</button></div>
     </div>
   </div>
 
-  <!-- ══ CONTACT ══ -->
-  <div class="screen" id="s-contact">
+  <div class="scr" id="nq-contact">
     <div class="cblock">
-      <div class="c-eye">Almost There</div>
-      <h2 class="c-title">Your lip recommendation<br>is ready</h2>
-      <p class="c-sub">Enter your details to see your personalized result and unlock the <em>$500 promo price.</em></p>
+      <div class="ceye">Almost There</div>
+      <h2 class="ctit">Your lip recommendation<br>is ready</h2>
+      <p class="csub">Enter your details to see your result and unlock the <em>$500 promo price.</em></p>
       <div class="fields">
-        <input class="finp" type="text"  placeholder="Your name">
-        <input class="finp" type="tel"   placeholder="Phone number">
-        <input class="finp" type="email" placeholder="Email address">
+        <input class="finp" type="text" id="nq-name" placeholder="Your name">
+        <input class="finp" type="tel" id="nq-phone" placeholder="Phone number">
+        <input class="finp" type="email" id="nq-email" placeholder="Email address">
       </div>
-      <label class="chk">
-        <input type="checkbox" checked>
-        <span>I agree to receive personalized offers and updates from notJUSTLIPS New York</span>
-      </label>
-      <button class="btn btn-primary btn-block" onclick="showResult()">Show My Result</button>
+      <div id="nq-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:10px;font-weight:400;">Please enter your name and email.</div>
+      <label class="chk"><input type="checkbox" checked><span>I agree to receive personalized offers from notJUSTLIPS New York</span></label>
+      <button class="btn btnp btnb" id="nq-submitbtn" onclick="njlSubmit()">Show My Result</button>
     </div>
   </div>
 
-  <!-- ══ RESULT ══ -->
-  <div class="screen" id="s-result">
-    <div class="res-hero">
-      <div class="res-eye">Your Recommendation</div>
-      <div class="res-into">Based on your answers, you are a great candidate for</div>
-      <div class="res-tech">Russian Lips</div>
-      <div class="res-rule"></div>
-      <p class="res-desc">This technique creates a lifted shape with a defined cupid's bow and natural looking volume — perfectly tailored to your anatomy.</p>
+  <div class="scr" id="nq-result">
+    <div class="rhero">
+      <div class="reye">Your Recommendation</div>
+      <div class="rinto">Based on your answers, you are a great candidate for</div>
+      <div class="rtech">Russian Lips</div>
+      <div class="rrule"></div>
+      <p class="rdesc">This technique creates a lifted shape with a defined cupid's bow and natural looking volume — perfectly tailored to your anatomy.</p>
     </div>
-
-    <div class="res-body">
-      <span class="sec-lbl">Recommended Volume</span>
-      <div class="vol-pill">
-        <div class="vol-dot"></div>
-        <div class="vol-txt" id="resVol">1 ml Russian Lips</div>
-      </div>
-
-      <span class="sec-lbl">Available Injectors</span>
-      <div class="inj-row">
-        <div class="inj-chip">Alexis</div>
-        <div class="inj-chip">Sabrina</div>
-        <div class="inj-chip">Natalia</div>
-      </div>
-
-      <div class="ben-wrap">
-        <div class="ben-head">Why clients love Russian Lips</div>
-        <div class="ben-grid">
-          <div class="ben-item"><div class="ben-dot"></div><div class="ben-txt">Lifted elegant shape</div></div>
-          <div class="ben-item"><div class="ben-dot"></div><div class="ben-txt">Natural looking volume</div></div>
-          <div class="ben-item"><div class="ben-dot"></div><div class="ben-txt">Defined cupid's bow</div></div>
-          <div class="ben-item"><div class="ben-dot"></div><div class="ben-txt">Most requested technique</div></div>
+    <div class="rbody">
+      <span class="slbl">Recommended Volume</span>
+      <div class="vpill"><div class="vdot"></div><div class="vtxt" id="nqVol">1 ml Russian Lips</div></div>
+      <span class="slbl">Available Injectors</span>
+      <div class="irow"><div class="ichip">Alexis</div><div class="ichip">Sabrina</div><div class="ichip">Natalia</div></div>
+      <div class="bwrap">
+        <div class="bhead">Why clients love Russian Lips</div>
+        <div class="bgrid">
+          <div class="bitem"><div class="bdot"></div><div class="btxt">Lifted elegant shape</div></div>
+          <div class="bitem"><div class="bdot"></div><div class="btxt">Natural looking volume</div></div>
+          <div class="bitem"><div class="bdot"></div><div class="btxt">Defined cupid's bow</div></div>
+          <div class="bitem"><div class="bdot"></div><div class="btxt">Most requested technique</div></div>
         </div>
       </div>
-
-      <div class="price-box">
-        <div class="price-eye">Special Promo Price · Quiz Exclusive</div>
-        <div class="price-num"><sup>$</sup>500</div>
-        <p class="price-note">Regular price is higher.<br><em>This promotion is available for a limited number of appointments.</em></p>
-        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btn-primary btn-block">Book Your Slot</a>
+      <div class="pbox">
+        <div class="peye">Special Promo Price · Quiz Exclusive</div>
+        <div class="pnum"><sup>$</sup>500</div>
+        <p class="pnote">Regular price is higher.<br><em>This promotion is available for a limited number of appointments.</em></p>
+        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btnp btnb">Book Your Slot</a>
       </div>
-
-      <div class="consult-box">
-        <p class="consult-txt">Not sure yet?<br>You can also book a free consultation with one of our injectors.</p>
-        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btn-ghost">Free Consultation</a>
+      <div class="cnsbox">
+        <p class="cnstxt">Not sure yet?<br>You can also book a free consultation.</p>
+        <a href="https://makeanappointment.online/p/booknow/" target="_blank" class="btn btng">Free Consultation</a>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
-<footer class="ftr">
-  <div class="ftr-logo">notJUSTLIPS · New York</div>
-  <div class="ftr-rule"></div>
-  <div class="ftr-addr">
-    144 East 74th Street, New York, NY<br>
-    <a href="tel:+16467659568">+1 (646) 765–9568</a>
-  </div>
-</footer>
-
 <script>
-const QS = [
-  { q:"Have you ever had lip fillers before?",
-    o:["No, this will be my first time","Yes, once or twice","Yes, I do them regularly"] },
-  { q:"Did you ever experience any issues after lip fillers?",
-    o:["No, everything healed well","I had bruising or swelling","I had uneven results or asymmetry"] },
-  { q:"Do you currently see any lip asymmetry?",
-    o:["No","A little bit","Yes, it's noticeable"] },
-  { q:"What type of result do you want?",
-    o:["Natural elegant lips","More volume but still natural","Doll-like lips with a defined shape"] },
-  { q:"What budget are you comfortable with for lip fillers?",
-    o:["$400–$600","$600–$800","$800+"] },
-  { q:"If your lips could look perfect after one appointment, how soon would you like to do the procedure?",
-    o:["As soon as possible","Within the next few weeks","Just exploring options for now"] }
+(function(){
+var QS=[
+  {q:"Have you ever had lip fillers before?",o:["No, this will be my first time","Yes, once or twice","Yes, I do them regularly"]},
+  {q:"Did you ever experience any issues after lip fillers?",o:["No, everything healed well","I had bruising or swelling","I had uneven results or asymmetry"]},
+  {q:"Do you currently see any lip asymmetry?",o:["No","A little bit","Yes, it's noticeable"]},
+  {q:"What type of result do you want?",o:["Natural elegant lips","More volume but still natural","Doll-like lips with a defined shape"]},
+  {q:"What budget are you comfortable with?",o:["$400-$600","$600-$800","$800+"]},
+  {q:"How soon would you like to do the procedure?",o:["As soon as possible","Within the next few weeks","Just exploring options for now"]}
 ];
-
-let qi=0, ans=[], sel=null;
-
+var qi=0,ans=[],sel=null;
 function swap(a,b){
-  document.getElementById(a).classList.remove('active');
-  document.getElementById(b).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById(a).classList.remove('on');
+  document.getElementById(b).classList.add('on');
+  document.getElementById('njl-quiz').scrollIntoView({behavior:'smooth'});
 }
-
-function go0(){ qi=0; ans=[]; renderQ(); swap('s-start','s-q'); }
-
-function renderQ(){
+window.njlGo=function(){qi=0;ans=[];render();swap('nq-start','nq-q')};
+function render(){
   sel=null;
-  const d=QS[qi], pct=Math.round(qi/QS.length*100);
-  document.getElementById('qEye').textContent='Question '+String(qi+1).padStart(2,'0');
-  document.getElementById('qTitle').textContent=d.q;
-  document.getElementById('pLbl').textContent=`Question ${qi+1} of ${QS.length}`;
-  document.getElementById('pPct').textContent=pct+'%';
-  document.getElementById('pFill').style.width=pct+'%';
-  document.getElementById('btnNext').classList.remove('on');
-  const wrap=document.getElementById('qOpts');
-  wrap.innerHTML='';
-  ['A','B','C'].forEach((l,i)=>{
-    const el=document.createElement('div');
+  var d=QS[qi],pct=Math.round(qi/QS.length*100);
+  document.getElementById('nqEye').textContent='Question '+String(qi+1).padStart(2,'0');
+  document.getElementById('nqTit').textContent=d.q;
+  document.getElementById('nqLbl').textContent='Question '+(qi+1)+' of '+QS.length;
+  document.getElementById('nqPct').textContent=pct+'%';
+  document.getElementById('nqFill').style.width=pct+'%';
+  document.getElementById('nqNext').classList.remove('on');
+  var w=document.getElementById('nqOpts');w.innerHTML='';
+  ['A','B','C'].forEach(function(l,i){
+    var el=document.createElement('div');
     el.className='opt';
-    el.innerHTML=`<div class="opt-l">${l}</div><div class="opt-t">${d.o[i]}</div>`;
-    el.onclick=()=>{
-      document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
-      el.classList.add('sel'); sel=i;
-      document.getElementById('btnNext').classList.add('on');
+    el.innerHTML='<div class="optl">'+l+'</div><div class="optt">'+d.o[i]+'</div>';
+    el.onclick=function(){
+      document.querySelectorAll('#njl-quiz .opt').forEach(function(x){x.classList.remove('sel')});
+      el.classList.add('sel');sel=i;
+      document.getElementById('nqNext').classList.add('on');
     };
-    wrap.appendChild(el);
+    w.appendChild(el);
   });
 }
-
-function nextQ(){
+window.njlNext=function(){
   if(sel===null)return;
-  ans.push(sel); qi++;
-  if(qi<QS.length){ renderQ(); }
+  ans.push(sel);qi++;
+  if(qi<QS.length){render();}
   else{
-    document.getElementById('pFill').style.width='100%';
-    document.getElementById('pPct').textContent='100%';
-    swap('s-q','s-contact');
+    document.getElementById('nqFill').style.width='100%';
+    document.getElementById('nqPct').textContent='100%';
+    swap('nq-q','nq-contact');
   }
-}
-
-function calcResult(){
-  const [a1,a2,a3,a4]=[ans[0],ans[1],ans[2],ans[3]];
-  if(a3===2||a2===2) return '1 ml · Russian Lips with correction';
-  if(a4===2)         return '1 ml · Russian Lips with enhanced shape';
-  if(a1===0&&a4===0) return '0.7 ml · Russian Lips';
-  if(a1>=1&&a4===1)  return '1 ml · Russian Lips';
-  return '1 ml · Russian Lips';
-}
-
-function showResult(){
-  document.getElementById('resVol').textContent=calcResult();
-  swap('s-contact','s-result');
-}
+};
+window.njlResult=function(){
+  var a=ans;
+  var vol='1 ml - Russian Lips';
+  if(a[2]===2||a[1]===2)vol='1 ml - Russian Lips with correction';
+  else if(a[3]===2)vol='1 ml - Russian Lips with enhanced shape';
+  else if(a[0]===0&&a[3]===0)vol='0.7 ml - Russian Lips';
+  document.getElementById('nqVol').textContent=vol;
+  swap('nq-contact','nq-result');
+};
+window.njlSubmit=function(){
+  var name=document.getElementById('nq-name').value.trim();
+  var email=document.getElementById('nq-email').value.trim();
+  var phone=document.getElementById('nq-phone').value.trim();
+  var err=document.getElementById('nq-err');
+  var btn=document.getElementById('nq-submitbtn');
+  if(!name||!email||email.indexOf('@')===-1){err.style.display='block';return;}
+  err.style.display='none';
+  btn.textContent='Loading...';
+  btn.disabled=true;
+  var a=ans;
+  var vol='1 ml - Russian Lips';
+  if(a[2]===2||a[1]===2)vol='1 ml - Russian Lips with correction';
+  else if(a[3]===2)vol='1 ml - Russian Lips with enhanced shape';
+  else if(a[0]===0&&a[3]===0)vol='0.7 ml - Russian Lips';
+  document.getElementById('nqVol').textContent=vol;
+  var nameParts=name.split(' ');
+  var fname=nameParts[0]||name;
+  var lname=nameParts.slice(1).join(' ')||'';
+  var iframe=document.getElementById('mc_iframe');
+  if(!iframe){iframe=document.createElement('iframe');iframe.name='mc_iframe';iframe.id='mc_iframe';iframe.style.display='none';document.body.appendChild(iframe);}
+  var f=document.createElement('form');
+  f.action='https://online.us22.list-manage.com/subscribe/post?u=c56fdb996cd28b105e16fc61f&id=c49bd62fae&f_id=00a2dbe1f0';
+  f.method='POST';
+  f.target='mc_iframe';
+  f.style.display='none';
+  var data={'EMAIL':email,'FNAME':fname,'LNAME':lname,'PHONE':phone,'b_c56fdb996cd28b105e16fc61f_c49bd62fae':''};
+  Object.keys(data).forEach(function(k){var i=document.createElement('input');i.type='hidden';i.name=k;i.value=data[k];f.appendChild(i);});
+  document.body.appendChild(f);
+  f.submit();
+  setTimeout(function(){if(f.parentNode)f.parentNode.removeChild(f);},3000);
+  setTimeout(function(){
+    btn.textContent='Show My Result';
+    btn.disabled=false;
+    swap('nq-contact','nq-result');
+    if(window.fbq){
+      fbq('track','Lead',{content_name:'Lip Quiz'});
+      fbq('track','CompleteRegistration',{content_name:'Lip Quiz'});
+    }
+  },1500);
+};
+})();
 </script>
-</body>
-</html>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','382002759543740');
+fbq('track','PageView');
+</script>
