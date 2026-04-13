@@ -188,11 +188,11 @@
       <p class="csub">Enter your details to see your result and unlock the <em>$500 promo price.</em></p>
       <div class="fields">
         <input class="finp" type="text" id="nq-name" placeholder="Your name">
-        <input class="finp" type="tel" id="nq-phone" placeholder="Phone number">
+        <input class="finp" type="tel" id="nq-phone" placeholder="+1 (555) 000-0000" maxlength="17">
         <input class="finp" type="email" id="nq-email" placeholder="Email address">
       </div>
-      <div id="nq-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:10px;font-weight:400;">Please enter your name and valid email.</div>
-      <label class="chk"><input type="checkbox" checked><span>I agree to receive personalized offers from notJUSTLIPS New York</span></label>
+      <div id="nq-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:10px;font-weight:400;">Please fill in all fields, use a valid US phone (+1), and agree to our Privacy Policy.</div>
+      <label class="chk"><input type="checkbox" id="nq-consent"><span>I agree to the processing of my personal data (email/phone) to receive my results and personalized offers from notJUSTLIPS New York. <a href="https://daring-smm.ru/notjustlips/privatpolicy.html" target="_blank" style="color:#c09060;">Privacy Policy</a>.</span></label>
       <button class="btn btnp btnb" id="nq-submitbtn" onclick="njlSubmit()">Show My Result</button>
     </div>
   </div>
@@ -334,7 +334,10 @@
     var err = document.getElementById('nq-err');
     var btn = document.getElementById('nq-submitbtn');
 
-    if (!name || !email || email.indexOf('@') === -1) {
+    var digits = phone.replace(/[^0-9]/g,'');
+    if(digits.charAt(0)==='1') digits=digits.substring(1);
+    var consent = document.getElementById('nq-consent');
+    if (!name || !email || email.indexOf('@') === -1 || digits.length !== 10 || !consent.checked) {
       err.style.display = 'block';
       trackMetaCustom('QuizValidationError', { quiz_name: 'Lip Quiz' });
       return;
@@ -435,6 +438,23 @@
       quiz_name: 'Lip Quiz'
     });
   };
+})();
+</script>
+<script>
+(function(){
+  var ph = document.getElementById('nq-phone');
+  if(ph){
+    ph.addEventListener('input', function(){
+      var v = this.value.replace(/[^0-9]/g,'');
+      if(v.charAt(0)==='1') v=v.substring(1);
+      v=v.substring(0,10);
+      var r='';
+      if(v.length>0) r='+1 ('+v.substring(0,3);
+      if(v.length>=4) r+=') '+v.substring(3,6);
+      if(v.length>=7) r+='-'+v.substring(6,10);
+      this.value=r;
+    });
+  }
 })();
 </script>
 
